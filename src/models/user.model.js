@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     },
 
     name : {
-        type : Srting,
+        type : String,
         required:[true , "Name is required for an account"]
     },
 
