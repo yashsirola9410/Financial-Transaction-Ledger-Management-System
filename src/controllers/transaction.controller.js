@@ -1,6 +1,7 @@
 const transactionModel = require('../models/transaction.models')
 const ledgerModel = require('../models/ledger.models')
 const  emailService = require('../services/email.service')
+const accountModel = require('../models/account.models')
 
 
 //create new transaction 
@@ -14,6 +15,14 @@ const  emailService = require('../services/email.service')
   //8 - Mark transaction completed 
   //9 - commit mongoDb session 
   //10 - Send email notification
+
+
+  async function createTransaction(req , res){
+     
+    const  {fromAccount , toAccount , amount , idempotencyKey} = req.body
+
+
+  }
 
 
   

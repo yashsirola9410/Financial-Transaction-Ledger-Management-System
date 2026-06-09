@@ -1,4 +1,5 @@
 const {Router} = require('express')
+const authMiddleware = require('../middleware/auth.middleware')
 
 
 const transactionRoutes = Router();
@@ -6,6 +7,6 @@ const transactionRoutes = Router();
 //POST /api/transactions/
 //create a new transaction
 
-transactionRoutes.post("/")
+transactionRoutes.post("/" , authMiddleware.authMiddlware)
 
 modeule.exports = transactionRoutes;
