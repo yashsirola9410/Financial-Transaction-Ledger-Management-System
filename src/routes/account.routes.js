@@ -13,5 +13,11 @@ router.post("/" , authMiddleware , accountController.createAccountController)
 
 
 
+//get api for user account 
+router.get("/", authMiddleware , accountController.getUserAccountsController)
+
+
+//get amccount balance 
+router.get("/balance/:accountId" , authMiddleware , accountController.getAccountBalanceController)
 
 module.exports =  router

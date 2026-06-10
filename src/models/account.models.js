@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-// const ledgerModel = require('./ledger.model')
+const ledgerModel = require('../models/ledger.models')
 
 
 const accountSchema  = new mongoose.Schema({
