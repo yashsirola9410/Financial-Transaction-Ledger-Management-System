@@ -1,10 +1,11 @@
 const userModel = require('../models/user.model')
 const jwt = require('jsonwebtoken')
+const tokenBlackListModel = require('../models/blacklist.models')
 
 
 async function authMiddleware(req , res , next){
 
-    const token = req.cookies.token || req.header.authorization?.split(" ")[1]
+    const token = req.cookies.token || req.headers.authorization?.split(" ")[1]
 
     if(!token){
         return res.status(401).json({
@@ -32,7 +33,7 @@ async function authMiddleware(req , res , next){
 
 async function authSystemUserMiddleware(req , res , next){
      
-    const token = req.cookies.token || req.header.authorization?.split(" ")[1]
+    const token = req.cookies.token || req.headers.authorization?.split(" ")[1]
 
     if(!token){
         return res.status(401).json({
@@ -54,7 +55,7 @@ async function authSystemUserMiddleware(req , res , next){
         const user = await userModel.findById(decoded.userId).select("+systemUser")
         if(!user.systemUser){
             return res.status(403).json({
-                message : "Frobidden access , user is not a system user"
+                message : "Forbidden access , user is not a system user"
             })
         }
         req.user = user

@@ -7,7 +7,7 @@ const  mongoose = require('mongoose')
 
 //create new transaction 
   //1 - Validate request 
-  //2 validate Idempotancy key
+  //2 validate Idempotency key
   //3 - check account status
   //4 - driver sender balance from ledger 
   //5- create transaction with pending status
