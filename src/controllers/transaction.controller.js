@@ -1,6 +1,6 @@
 const transactionModel = require('../models/transaction.models')
 const ledgerModel = require('../models/ledger.models')
-const  emailService = require('../services/email.service')
+const emailService = require('../services/email.service')
 const accountModel = require('../models/account.models')
 const  mongoose = require('mongoose')
 
@@ -77,7 +77,7 @@ const  mongoose = require('mongoose')
 
       // check account status 
 
-      if(fromUserAccount.status !== "ACTIVE"  || toUSerAccount.status !== "ACTIVE"){
+      if(fromUserAccount.status !== "ACTIVE"  || toUserAccount.status !== "ACTIVE"){
         return res.status(400).json({
           message : "Both from and to accounts must be active to process the transaction"
         })
@@ -121,7 +121,7 @@ const  mongoose = require('mongoose')
           return new Promise((resolve) => setTimeout(resolve , 15 * 1000));
         })()
 
-        const creditLedgerEntry = await LedgerModel.create([{
+        const creditLedgerEntry = await ledgerModel.create([{
           account : toAccount,
           amount : amount,
           transaction : transaction._id,
@@ -153,11 +153,11 @@ const  mongoose = require('mongoose')
   }
 
 
-  
+
 
 
 // creating  initial funds transaction from system account to user account
-  async function createInitialFundstransaction(req , res){
+  async function createInitialFundsTransaction(req , res){
     const {toAccount , amount , idempotencyKey} = req.body
 
     if(!toAccount || !amount || !idempotencyKey){
@@ -198,13 +198,13 @@ const  mongoose = require('mongoose')
     })
 
     const debitLedgerEntry = await ledgerModel.create([{
-      acccount  : fromUserAccount._id,
+      account  : fromUserAccount._id,
       amount : amount,
       transaction : transaction._id,
       type : "DEBIT"
     }], { session})
 
-    const creditLdegerEntry = await ledgerModel.create([{
+    const creditLedgerEntry = await ledgerModel.create([{
       account : toAccount, 
       amount :amount , 
       transaction : transaction._id,
@@ -226,7 +226,7 @@ const  mongoose = require('mongoose')
 
   module.exports = { 
     createTransaction,
-    createInitialFundstransaction
+    createInitialFundsTransaction
   }
 
 
