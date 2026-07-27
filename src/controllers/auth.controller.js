@@ -75,6 +75,7 @@ async function userLoginController(req , res){
         })
 }
 
+
 //logout controller 
 async function userLogoutController(req, res) {
     const token = req.cookies.token || req.headers.authorization?.split(" ")[ 1 ]

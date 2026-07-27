@@ -15,6 +15,8 @@ async function createAccountController(req, res) {
 
 }
 
+
+
 async function getUserAccountsController(req, res) {
 
     const accounts = await accountModel.find({ user: req.user._id });
@@ -23,6 +25,8 @@ async function getUserAccountsController(req, res) {
         accounts
     })
 }
+
+
 
 async function getAccountBalanceController(req, res) {
     const { accountId } = req.params;
